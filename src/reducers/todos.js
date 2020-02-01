@@ -1,8 +1,8 @@
 let fakeID = 0;
-const todos = (state = [], action) => {
+const todosReducer = (state = [], action) => {
   switch (action.type) {
     case 'ADD_TODO':
-      return [...state, {id: fakeID++, Text: action.payload, completed: false}];
+      return [...state, {id: fakeID++, text: action.payload, completed: false}];
     case 'TODO_COMPLETE':
       return state.map(todo => {
         if (todo.id === action.payload) {
@@ -18,4 +18,4 @@ const todos = (state = [], action) => {
       return state;
   }
 };
-export default todos;
+export default todosReducer;

@@ -2,7 +2,9 @@ import React, {Component} from 'react';
 import {Icon, Badge, Fab} from 'native-base';
 import JDate from 'jalali-date';
 import {View, Text} from 'react-native';
-import PopupDialog from './popupDialog';
+import PopupDialog from '../popupDialog';
+import TodoList from '../todosList';
+import {connect} from 'react-redux';
 
 class HomeScreen extends Component {
   constructor(props) {
@@ -22,7 +24,8 @@ class HomeScreen extends Component {
         <View
           style={{
             flexDirection: 'row',
-            justifyContent: 'space-evenly',
+            justifyContent: 'space-around',
+            alignItems: 'center',
             backgroundColor: 'lightblue',
             paddingVertical: 10,
           }}>
@@ -33,7 +36,12 @@ class HomeScreen extends Component {
               style={{fontSize: 30, color: 'orange'}}
             />
             <Badge danger style={{justifyContent: 'center'}}>
-              <Text style={{fontSize: 15, color: 'orange'}}>0</Text>
+              <Text style={{fontSize: 15, color: 'orange'}}>
+                {
+                  this.props.todos.filter(todo => todo.completed !== true)
+                    .length
+                }
+              </Text>
             </Badge>
           </View>
           <View>
@@ -55,6 +63,9 @@ class HomeScreen extends Component {
           </View>
         </View>
         <View style={{flex: 1}}>
+          <View style={{paddingTop: 10}}>
+            <TodoList />
+          </View>
           <Fab
             style={{backgroundColor: '#f0ad4e'}}
             position="bottomLeft"
@@ -68,5 +79,8 @@ class HomeScreen extends Component {
     );
   }
 }
+const mapStateToProps = state => ({
+  todos: state,
+});
 
-export default HomeScreen;
+export default connect(mapStateToProps)(HomeScreen);

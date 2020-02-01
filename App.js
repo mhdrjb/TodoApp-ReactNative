@@ -9,11 +9,9 @@ I18nManager.forceRTL(true);
 export default class App extends Component {
   render() {
     return (
-      <>
-        <Provider store={store}>
-          <AppNavigation />
-        </Provider>
-      </>
+      <Provider store={store}>
+        <AppNavigation />
+      </Provider>
     );
   }
 }

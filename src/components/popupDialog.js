@@ -7,11 +7,12 @@ import Dialog, {
   DialogContent,
 } from 'react-native-popup-dialog';
 import {TextInput} from 'react-native';
+import {connect} from 'react-redux';
 
 class PopupDialog extends Component {
   constructor(props) {
     super(props);
-    this.state = {showDialog: false};
+    this.state = {showDialog: false, todo: ''};
   }
   componentDidMount() {
     this.props.showDialog(this.showDialog);
@@ -38,7 +39,13 @@ class PopupDialog extends Component {
               text="ثبت"
               textStyle={{fontSize: 25, fontWeight: 'bold'}}
               style={{backgroundColor: 'lightblue'}}
-              onPress={() => {}}
+              onPress={() => {
+                this.props.addTodo(this.state.todo);
+                this.setState({
+                  showDialog: false,
+                  todo: '',
+                });
+              }}
             />
             <DialogButton
               text="انصراف"
@@ -59,11 +66,16 @@ class PopupDialog extends Component {
               borderColor: 'gray',
               marginTop: 10,
             }}
+            value={this.state.todo}
+            onChangeText={text => this.setState({todo: text})}
           />
         </DialogContent>
       </Dialog>
     );
   }
 }
+const mapDispatchToProps = dispatch => ({
+  addTodo: todo => dispatch({type: 'ADD_TODO', payload: todo}),
+});
 
-export default PopupDialog;
+export default connect(null, mapDispatchToProps)(PopupDialog);
