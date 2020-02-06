@@ -16,6 +16,7 @@ class PopupDialog extends Component {
   }
   componentDidMount() {
     this.props.showDialog(this.showDialog);
+    // this.props.showDialogFunc(this.showDialog);
   }
   showDialog = () => {
     this.setState({showDialog: !this.state.showDialog});
@@ -76,6 +77,7 @@ class PopupDialog extends Component {
 }
 const mapDispatchToProps = dispatch => ({
   addTodo: todo => dispatch({type: 'ADD_TODO', payload: todo}),
+  // showDialogFunc: func => dispatch({type: 'SHOWDIALOG', payload: func}),
 });
 
 export default connect(null, mapDispatchToProps)(PopupDialog);

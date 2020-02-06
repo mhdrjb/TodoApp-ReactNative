@@ -1,57 +1,88 @@
 import React, {Component} from 'react';
-import {ScrollView} from 'react-native';
-import {SwipeRow, Button, Icon, View, Text} from 'native-base';
+import {ScrollView, View, Text} from 'react-native';
+import {Button, Icon} from 'native-base';
 import {connect} from 'react-redux';
 
 class TodoList extends Component {
   render() {
     const {todos, deleteTodo, completeTodo} = this.props;
+    const inCompletedTodos = todos.filter(todo => !todo.completed);
     return (
       <ScrollView>
-        {todos.filter(todo => todo.completed !== true).length > 0 ? (
-          todos.map(todo => {
-            if (!todo.completed) {
-              return (
-                <SwipeRow
-                  key={todo.id}
-                  leftOpenValue={75}
-                  rightOpenValue={-75}
+        {inCompletedTodos.length > 0 ? (
+          inCompletedTodos.map(todo => {
+            return (
+              <View
+                key={todo.id}
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  backgroundColor: 'gray',
+                  margin: 5,
+                }}>
+                <Button
+                  danger
+                  onPress={() => {
+                    deleteTodo(todo.id);
+                  }}>
+                  <Icon active name="trash" />
+                </Button>
+                <Text
                   style={{
-                    backgroundColor: '#f4f4f4',
-                  }}
-                  right={
-                    <Button
-                      success
-                      onPress={() => {
-                        completeTodo(todo.id);
-                      }}>
-                      <Icon type="Entypo" active name="check" />
-                    </Button>
-                  }
-                  body={
-                    <View style={{flex: 1}}>
-                      <Text
-                        style={{
-                          fontFamily: 'Yekan',
-                          fontSize: 25,
-                          textAlign: 'center',
-                        }}>
-                        {todo.text}
-                      </Text>
-                    </View>
-                  }
-                  left={
-                    <Button
-                      danger
-                      onPress={() => {
-                        deleteTodo(todo.id);
-                      }}>
-                      <Icon active name="trash" />
-                    </Button>
-                  }
-                />
-              );
-            }
+                    fontFamily: 'Yekan',
+                    fontSize: 25,
+                    textAlign: 'center',
+                    color: 'white',
+                  }}>
+                  {todo.text}
+                </Text>
+                <Button
+                  success
+                  onPress={() => {
+                    completeTodo(todo.id);
+                  }}>
+                  <Icon type="Entypo" active name="check" />
+                </Button>
+              </View>
+              // key={todo.id}
+              // leftOpenValue={75}
+              // rightOpenValue={-75}
+              // style={{
+              //   backgroundColor: '#f4f4f4',
+              // }}
+              // right={
+              //   <Button
+              //     success
+              //     onPress={() => {
+              //       completeTodo(todo.id);
+              //     }}>
+              //     <Icon type="Entypo" active name="check" />
+              //   </Button>
+              // }
+              // body={
+              //   <View style={{flex: 1}}>
+              //     <Text
+              //       style={{
+              //         fontFamily: 'Yekan',
+              //         fontSize: 25,
+              //         textAlign: 'center',
+              //       }}>
+              //       {todo.text}
+              //     </Text>
+              //   </View>
+              // }
+              // left={
+              //   <Button
+              //     danger
+              //     onPress={() => {
+              //       deleteTodo(todo.id);
+              //     }}>
+              //     <Icon active name="trash" />
+              //   </Button>
+              // }
+              // />
+            );
           })
         ) : (
           <View

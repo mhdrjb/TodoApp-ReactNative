@@ -63,7 +63,7 @@ class HomeScreen extends Component {
           </View>
         </View>
         <View style={{flex: 1}}>
-          <View style={{paddingTop: 10}}>
+          <View>
             <TodoList />
           </View>
           <Fab
@@ -81,6 +81,7 @@ class HomeScreen extends Component {
 }
 const mapStateToProps = state => ({
   todos: state,
+  // showDialog: state.popUpReducer
 });
 
 export default connect(mapStateToProps)(HomeScreen);
