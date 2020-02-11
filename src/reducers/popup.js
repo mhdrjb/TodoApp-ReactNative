@@ -1,9 +1,9 @@
-const popUpReducer = (state = {}, action) => {
+const popUpReducer = (state = {showDialog: false}, action) => {
   switch (action.type) {
     case 'SHOWDIALOG':
-      state.showDialog = action.payload;
-      return state;
+      return {...state, showDialog: !state.showDialog};
     default:
       return state;
   }
 };
+export default popUpReducer;

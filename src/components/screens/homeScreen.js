@@ -11,16 +11,11 @@ class HomeScreen extends Component {
     super(props);
     this.state = {};
   }
-  showDialog = null;
   render() {
     const jalaliDate = new JDate();
     return (
       <View style={{flex: 1}}>
-        <PopupDialog
-          showDialog={func => {
-            this.showDialog = func;
-          }}
-        />
+        <PopupDialog />
         <View
           style={{
             flexDirection: 'row',
@@ -70,7 +65,7 @@ class HomeScreen extends Component {
             style={{backgroundColor: '#f0ad4e'}}
             position="bottomLeft"
             onPress={() => {
-              this.showDialog();
+              this.props.showDialog();
             }}>
             <Icon type="FontAwesome" name="plus" style={{fontSize: 25}} />
           </Fab>
@@ -80,8 +75,10 @@ class HomeScreen extends Component {
   }
 }
 const mapStateToProps = state => ({
-  todos: state,
-  // showDialog: state.popUpReducer
+  todos: state.todosReducer,
+});
+const mapDispatchToProps = dispatch => ({
+  showDialog: () => dispatch({type: 'SHOWDIALOG'}),
 });
 
-export default connect(mapStateToProps)(HomeScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);

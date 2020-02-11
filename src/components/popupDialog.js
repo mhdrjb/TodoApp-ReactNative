@@ -12,21 +12,18 @@ import {connect} from 'react-redux';
 class PopupDialog extends Component {
   constructor(props) {
     super(props);
-    this.state = {showDialog: false, todo: ''};
+    this.state = {todo: ''};
   }
-  componentDidMount() {
-    this.props.showDialog(this.showDialog);
-    // this.props.showDialogFunc(this.showDialog);
-  }
+
   showDialog = () => {
     this.setState({showDialog: !this.state.showDialog});
   };
   render() {
     return (
       <Dialog
-        visible={this.state.showDialog}
+        visible={this.props.showDialog.showDialog}
         width={0.8}
-        onTouchOutside={() => this.setState({showDialog: false})}
+        onTouchOutside={() => this.props.closeDialog()}
         dialogTitle={
           <DialogTitle
             title="ثبت کار جدید"
@@ -42,8 +39,8 @@ class PopupDialog extends Component {
               style={{backgroundColor: 'lightblue'}}
               onPress={() => {
                 this.props.addTodo(this.state.todo);
+                this.props.closeDialog();
                 this.setState({
-                  showDialog: false,
                   todo: '',
                 });
               }}
@@ -53,7 +50,7 @@ class PopupDialog extends Component {
               textStyle={{fontSize: 25, fontWeight: 'bold'}}
               style={{backgroundColor: 'orange'}}
               onPress={() => {
-                this.setState({showDialog: false});
+                this.props.closeDialog();
               }}
             />
           </DialogFooter>
@@ -77,7 +74,10 @@ class PopupDialog extends Component {
 }
 const mapDispatchToProps = dispatch => ({
   addTodo: todo => dispatch({type: 'ADD_TODO', payload: todo}),
-  // showDialogFunc: func => dispatch({type: 'SHOWDIALOG', payload: func}),
+  closeDialog: () => dispatch({type: 'SHOWDIALOG'}),
+});
+const mapStateToProps = state => ({
+  showDialog: state.popUpReducer,
 });
 
-export default connect(null, mapDispatchToProps)(PopupDialog);
+export default connect(mapStateToProps, mapDispatchToProps)(PopupDialog);

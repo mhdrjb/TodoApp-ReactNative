@@ -45,43 +45,6 @@ class TodoList extends Component {
                   <Icon type="Entypo" active name="check" />
                 </Button>
               </View>
-              // key={todo.id}
-              // leftOpenValue={75}
-              // rightOpenValue={-75}
-              // style={{
-              //   backgroundColor: '#f4f4f4',
-              // }}
-              // right={
-              //   <Button
-              //     success
-              //     onPress={() => {
-              //       completeTodo(todo.id);
-              //     }}>
-              //     <Icon type="Entypo" active name="check" />
-              //   </Button>
-              // }
-              // body={
-              //   <View style={{flex: 1}}>
-              //     <Text
-              //       style={{
-              //         fontFamily: 'Yekan',
-              //         fontSize: 25,
-              //         textAlign: 'center',
-              //       }}>
-              //       {todo.text}
-              //     </Text>
-              //   </View>
-              // }
-              // left={
-              //   <Button
-              //     danger
-              //     onPress={() => {
-              //       deleteTodo(todo.id);
-              //     }}>
-              //     <Icon active name="trash" />
-              //   </Button>
-              // }
-              // />
             );
           })
         ) : (
@@ -101,7 +64,7 @@ class TodoList extends Component {
   }
 }
 const mapStateToProps = state => ({
-  todos: state,
+  todos: state.todosReducer,
 });
 const mapDispatchToProps = dispatch => ({
   deleteTodo: id => dispatch({type: 'DELETE_TODO', payload: id}),
