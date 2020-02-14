@@ -22,7 +22,7 @@ const todosReducer = (state = initialState, action) => {
           });
         })
         .then(todos => {
-          AsyncStorage.setItem(JSON.stringify(todos));
+          AsyncStorage.setItem('todo', JSON.stringify(todos));
         });
       return state.map(todo => {
         if (todo.text === action.payload) {
