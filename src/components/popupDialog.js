@@ -19,11 +19,12 @@ class PopupDialog extends Component {
     this.setState({showDialog: !this.state.showDialog});
   };
   render() {
+    const {closeDialog, showDialog, addTodo} = this.props;
     return (
       <Dialog
-        visible={this.props.showDialog.showDialog}
+        visible={showDialog.showDialog}
         width={0.8}
-        onTouchOutside={() => this.props.closeDialog()}
+        onTouchOutside={() => closeDialog()}
         dialogTitle={
           <DialogTitle
             title="ثبت کار جدید"
@@ -38,8 +39,8 @@ class PopupDialog extends Component {
               textStyle={{fontSize: 25, fontWeight: 'bold'}}
               style={{backgroundColor: 'lightblue'}}
               onPress={() => {
-                this.props.addTodo(this.state.todo);
-                this.props.closeDialog();
+                addTodo(this.state.todo);
+                closeDialog();
                 this.setState({
                   todo: '',
                 });
@@ -50,7 +51,7 @@ class PopupDialog extends Component {
               textStyle={{fontSize: 25, fontWeight: 'bold'}}
               style={{backgroundColor: 'orange'}}
               onPress={() => {
-                this.props.closeDialog();
+                closeDialog();
               }}
             />
           </DialogFooter>

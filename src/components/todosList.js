@@ -10,10 +10,10 @@ class TodoList extends Component {
     return (
       <ScrollView>
         {inCompletedTodos.length > 0 ? (
-          inCompletedTodos.map(todo => {
+          inCompletedTodos.map((todo, index) => {
             return (
               <View
-                key={todo.id}
+                key={index}
                 style={{
                   flexDirection: 'row',
                   justifyContent: 'space-between',
@@ -24,7 +24,7 @@ class TodoList extends Component {
                 <Button
                   danger
                   onPress={() => {
-                    deleteTodo(todo.id);
+                    deleteTodo(todo.text);
                   }}>
                   <Icon active name="trash" />
                 </Button>
@@ -40,7 +40,7 @@ class TodoList extends Component {
                 <Button
                   success
                   onPress={() => {
-                    completeTodo(todo.id);
+                    completeTodo(todo.text);
                   }}>
                   <Icon type="Entypo" active name="check" />
                 </Button>
@@ -67,8 +67,8 @@ const mapStateToProps = state => ({
   todos: state.todosReducer,
 });
 const mapDispatchToProps = dispatch => ({
-  deleteTodo: id => dispatch({type: 'DELETE_TODO', payload: id}),
-  completeTodo: id => dispatch({type: 'TODO_COMPLETE', payload: id}),
+  deleteTodo: todo => dispatch({type: 'DELETE_TODO', payload: todo}),
+  completeTodo: todo => dispatch({type: 'TODO_COMPLETE', payload: todo}),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TodoList);

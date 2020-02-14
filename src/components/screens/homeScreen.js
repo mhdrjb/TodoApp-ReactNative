@@ -12,6 +12,7 @@ class HomeScreen extends Component {
     this.state = {};
   }
   render() {
+    const {todos, showDialog, navigation} = this.props;
     const jalaliDate = new JDate();
     return (
       <View style={{flex: 1}}>
@@ -32,10 +33,7 @@ class HomeScreen extends Component {
             />
             <Badge danger style={{justifyContent: 'center'}}>
               <Text style={{fontSize: 15, color: 'orange'}}>
-                {
-                  this.props.todos.filter(todo => todo.completed !== true)
-                    .length
-                }
+                {todos.filter(todo => todo.completed !== true).length}
               </Text>
             </Badge>
           </View>
@@ -65,9 +63,21 @@ class HomeScreen extends Component {
             style={{backgroundColor: '#f0ad4e'}}
             position="bottomLeft"
             onPress={() => {
-              this.props.showDialog();
+              showDialog();
             }}>
             <Icon type="FontAwesome" name="plus" style={{fontSize: 25}} />
+          </Fab>
+          <Fab
+            style={{backgroundColor: '#f0ad4e'}}
+            position="bottomRight"
+            onPress={() => {
+              navigation.navigate('Completed');
+            }}>
+            <Icon
+              type="FontAwesome5"
+              name="clipboard-check"
+              style={{fontSize: 25}}
+            />
           </Fab>
         </View>
       </View>

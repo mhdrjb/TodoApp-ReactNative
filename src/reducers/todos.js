@@ -1,18 +1,47 @@
-let fakeID = 0;
-const todosReducer = (state = [], action) => {
+import {AsyncStorage} from 'react-native';
+
+const initialState = [];
+const todosReducer = (state = initialState, action) => {
   switch (action.type) {
+    case 'INIT':
+      return [...action.payload];
     case 'ADD_TODO':
-      return [...state, {id: fakeID++, text: action.payload, completed: false}];
+      let todo = [...state, {text: action.payload, completed: false}];
+      AsyncStorage.setItem('todo', JSON.stringify(todo));
+      return todo;
     case 'TODO_COMPLETE':
+      AsyncStorage.getItem('todo')
+        .then(data => {
+          let todos = JSON.parse(data);
+          return todos.map(todo => {
+            if (todo.text === action.payload) {
+              return {...todo, completed: !todo.completed};
+            } else {
+              return todo;
+            }
+          });
+        })
+        .then(todos => {
+          AsyncStorage.setItem(JSON.stringify(todos));
+        });
       return state.map(todo => {
-        if (todo.id === action.payload) {
+        if (todo.text === action.payload) {
           return {...todo, completed: !todo.completed};
         } else {
           return todo;
         }
       });
     case 'DELETE_TODO':
-      return state.filter(todo => todo.id !== action.payload);
+      AsyncStorage.getItem('todo')
+        .then(data => {
+          let todos = JSON.parse(data);
+          return todos.filter(todo => todo.text !== action.payload);
+        })
+        .then(todos => {
+          AsyncStorage.setItem('todo', JSON.stringify(todos));
+          console.log(todos);
+        });
+      return state.filter(todo => todo.text !== action.payload);
 
     default:
       return state;
