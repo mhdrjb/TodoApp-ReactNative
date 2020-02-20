@@ -5,6 +5,7 @@ import {View, Text} from 'react-native';
 import PopupDialog from '../popupDialog';
 import TodoList from '../todosList';
 import {connect} from 'react-redux';
+import {showDialog} from '../../actions/todoActions';
 
 class HomeScreen extends Component {
   constructor(props) {
@@ -88,7 +89,7 @@ const mapStateToProps = state => ({
   todos: state.todosReducer,
 });
 const mapDispatchToProps = dispatch => ({
-  showDialog: () => dispatch({type: 'SHOWDIALOG'}),
+  showDialog: () => dispatch(showDialog()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);

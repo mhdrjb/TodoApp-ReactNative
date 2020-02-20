@@ -8,6 +8,7 @@ import Dialog, {
 } from 'react-native-popup-dialog';
 import {TextInput} from 'react-native';
 import {connect} from 'react-redux';
+import {addTodoAction, showDialog} from '../actions/todoActions';
 
 class PopupDialog extends Component {
   constructor(props) {
@@ -74,8 +75,8 @@ class PopupDialog extends Component {
   }
 }
 const mapDispatchToProps = dispatch => ({
-  addTodo: todo => dispatch({type: 'ADD_TODO', payload: todo}),
-  closeDialog: () => dispatch({type: 'SHOWDIALOG'}),
+  addTodo: todo => dispatch(addTodoAction(todo)),
+  closeDialog: () => dispatch(showDialog()),
 });
 const mapStateToProps = state => ({
   showDialog: state.popUpReducer,

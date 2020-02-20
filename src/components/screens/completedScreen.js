@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Icon, Button} from 'native-base';
 import {View, Text, ScrollView} from 'react-native';
 import {connect} from 'react-redux';
+import {deleteTodoAction} from '../../actions/todoActions';
 
 class CompletedSc extends Component {
   render() {
@@ -99,7 +100,7 @@ const mapStateToProps = state => ({
   todos: state.todosReducer,
 });
 const mapDispatchToProps = dispatch => ({
-  deleteTodo: todo => dispatch({type: 'DELETE_TODO', payload: todo}),
+  deleteTodo: todo => dispatch(deleteTodoAction(todo)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CompletedSc);

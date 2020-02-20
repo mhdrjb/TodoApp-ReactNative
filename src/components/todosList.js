@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {ScrollView, View, Text} from 'react-native';
 import {Button, Icon} from 'native-base';
 import {connect} from 'react-redux';
+import {deleteTodoAction, todoCompleteAction} from '../actions/todoActions';
 
 class TodoList extends Component {
   render() {
@@ -67,8 +68,8 @@ const mapStateToProps = state => ({
   todos: state.todosReducer,
 });
 const mapDispatchToProps = dispatch => ({
-  deleteTodo: todo => dispatch({type: 'DELETE_TODO', payload: todo}),
-  completeTodo: todo => dispatch({type: 'TODO_COMPLETE', payload: todo}),
+  deleteTodo: todo => dispatch(deleteTodoAction(todo)),
+  completeTodo: todo => dispatch(todoCompleteAction(todo)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TodoList);
