@@ -3,6 +3,7 @@ import {createStackNavigator} from 'react-navigation-stack';
 import HomeScreen from './screens/homeScreen';
 import {createAppContainer} from 'react-navigation';
 import CompletedSc from './screens/completedScreen';
+import Splash from './screens/splash';
 
 class AppNavigation extends Component {
   render() {
@@ -11,6 +12,7 @@ class AppNavigation extends Component {
 }
 const AppStackNavigator = createStackNavigator(
   {
+    Splash: Splash,
     Home: HomeScreen,
     Completed: CompletedSc,
   },
