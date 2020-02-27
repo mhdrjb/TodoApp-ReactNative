@@ -1,9 +1,24 @@
 import React, {Component} from 'react';
 import {View, Image, Text} from 'react-native';
+import {StackActions} from 'react-navigation';
+import {CommonActions} from '@react-navigation/native';
 
 class Splash extends Component {
   componentDidMount() {
-    setTimeout(() => this.props.navigation.navigate('Home'), 4000);
+    // setTimeout(() =>
+    //   this.props.navigation.dispatch(
+    //     StackActions.replace('Home', {user: 'HTC'}),
+    //     4000,
+    //   ),
+    // );
+    // setTimeout(() => this.props.navigation.navigate('Home'), 4000);
+    setTimeout(() => {
+      this.props.navigation.dispatch(
+        CommonActions.reset({
+          routes: [{name: 'Home'}],
+        }),
+      );
+    }, 3000);
   }
   render() {
     return (
