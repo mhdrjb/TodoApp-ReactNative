@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {ScrollView, View, Text} from 'react-native';
+import {ScrollView, View, Text, Alert} from 'react-native';
 import {Button, Icon} from 'native-base';
 import {connect} from 'react-redux';
 import {deleteTodoAction, todoCompleteAction} from '../actions/todoActions';
@@ -25,7 +25,17 @@ class TodoList extends Component {
                 <Button
                   danger
                   onPress={() => {
-                    deleteTodo(todo.text);
+                    Alert.alert(`پاک کردن ${todo.text}`, 'مطمعنی؟', [
+                      {
+                        text: 'خیر',
+                        onPress: () => {},
+                        style: 'cancel',
+                      },
+                      {
+                        text: 'بله',
+                        onPress: () => deleteTodo(todo.text),
+                      },
+                    ]);
                   }}>
                   <Icon active name="trash" />
                 </Button>

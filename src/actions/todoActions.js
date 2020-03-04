@@ -1,4 +1,5 @@
 import AsyncStorage from '@react-native-community/async-storage';
+import PushNotification from 'react-native-push-notification';
 
 export const setInit = result => {
   return {type: 'INIT', payload: result};
@@ -32,6 +33,12 @@ export const todoCompleteAction = givenTodo => {
         console.log(todos);
         return todos.map(todo => {
           if (todo.text === givenTodo) {
+            PushNotification.localNotification({
+              bigText: 'اتمام کار',
+              subText: 'ایول انجام دادی',
+              title: `یوهو ${todo.text} انجام شد`,
+              message: `رو انجام دادی ${todo.text} یوهو`,
+            });
             return {...todo, completed: !todo.completed};
           } else {
             return todo;

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import {Icon, Badge, Fab} from 'native-base';
+import {Icon, Badge, Fab, Toast} from 'native-base';
 import JDate from 'jalali-date';
-import {View, Text} from 'react-native';
+import {View, Text, BackHandler} from 'react-native';
 import PopupDialog from '../popupDialog';
 import TodoList from '../todosList';
 import {connect} from 'react-redux';
@@ -10,11 +10,43 @@ import {showDialog} from '../../actions/todoActions';
 class HomeScreen extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      allowCloseApp: false,
+    };
   }
+  componentDidMount() {
+    console.log('home did mount');
+    BackHandler.addEventListener('hardwareBackPress', this.backHandleClick);
+  }
+  componentWillUnmount() {
+    console.log('home will unmount');
+    BackHandler.removeEventListener('hardwareBackPress', this.backHandleClick);
+  }
+  backHandleClick = () => {
+    if (this.state.allowCloseApp === true) {
+      BackHandler.exitApp();
+    } else {
+      this.setState({allowCloseApp: true}, () =>
+        Toast.show({
+          text: `برای خروج مجددا روی برگشت کلیک کنید`,
+          duration: 5000,
+          position: 'center',
+          type: 'success',
+          textStyle: {
+            color: '#fff',
+            fontFamily: 'Far_khodkar',
+            fontSize: 25,
+          },
+        }),
+      );
+      setTimeout(() => this.setState({allowCloseApp: false}), 5000);
+    }
+    return true;
+  };
   render() {
     const {todos, showDialog, navigation} = this.props;
     const jalaliDate = new JDate();
+    console.log('home render');
     return (
       <View style={{flex: 1}}>
         <PopupDialog />
@@ -73,6 +105,7 @@ class HomeScreen extends Component {
             position="bottomRight"
             onPress={() => {
               navigation.navigate('Completed');
+              // this.componentWillUnmount();
             }}>
             <Icon
               type="FontAwesome5"
