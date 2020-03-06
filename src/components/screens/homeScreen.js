@@ -23,25 +23,27 @@ class HomeScreen extends Component {
     BackHandler.removeEventListener('hardwareBackPress', this.backHandleClick);
   }
   backHandleClick = () => {
-    if (this.state.allowCloseApp === true) {
-      BackHandler.exitApp();
-    } else {
-      this.setState({allowCloseApp: true}, () =>
-        Toast.show({
-          text: `برای خروج مجددا روی برگشت کلیک کنید`,
-          duration: 5000,
-          position: 'center',
-          type: 'success',
-          textStyle: {
-            color: '#fff',
-            fontFamily: 'Far_khodkar',
-            fontSize: 25,
-          },
-        }),
-      );
-      setTimeout(() => this.setState({allowCloseApp: false}), 5000);
+    if (this.props.navigation.isFocused()) {
+      if (this.state.allowCloseApp === true) {
+        BackHandler.exitApp();
+      } else {
+        this.setState({allowCloseApp: true}, () =>
+          Toast.show({
+            text: `برای خروج مجددا روی برگشت کلیک کنید`,
+            duration: 5000,
+            position: 'center',
+            type: 'success',
+            textStyle: {
+              color: '#fff',
+              fontFamily: 'Far_khodkar',
+              fontSize: 25,
+            },
+          }),
+        );
+        setTimeout(() => this.setState({allowCloseApp: false}), 5000);
+      }
+      return true;
     }
-    return true;
   };
   render() {
     const {todos, showDialog, navigation} = this.props;

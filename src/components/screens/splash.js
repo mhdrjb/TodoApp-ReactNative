@@ -1,17 +1,9 @@
-import React, {Component} from 'react';
-import {View, Image, Text} from 'react-native';
-import {StackActions} from 'react-navigation';
 import {CommonActions} from '@react-navigation/native';
+import React, {Component} from 'react';
+import {Image, Text, View} from 'react-native';
 
 class Splash extends Component {
   componentDidMount() {
-    // setTimeout(() =>
-    //   this.props.navigation.dispatch(
-    //     StackActions.replace('Home', {user: 'HTC'}),
-    //     4000,
-    //   ),
-    // );
-    // setTimeout(() => this.props.navigation.navigate('Home'), 4000);
     setTimeout(() => {
       this.props.navigation.dispatch(
         CommonActions.reset({
