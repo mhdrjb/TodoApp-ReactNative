@@ -3,7 +3,7 @@ import {Icon, Button} from 'native-base';
 import {View, Text, ScrollView} from 'react-native';
 import {connect} from 'react-redux';
 import {deleteTodoAction} from '../../actions/todoActions';
-
+import {RFPercentage} from 'react-native-responsive-fontsize';
 class CompletedSc extends Component {
   render() {
     const {navigation, todos, deleteTodo} = this.props;
@@ -22,7 +22,7 @@ class CompletedSc extends Component {
             <Icon
               type="FontAwesome"
               name="check-square-o"
-              style={{fontSize: 30, color: 'orange'}}
+              style={{fontSize: RFPercentage(6), color: 'orange'}}
             />
           </View>
           <View>
@@ -30,7 +30,7 @@ class CompletedSc extends Component {
               style={{
                 fontFamily: 'Far_khodkar',
                 color: 'white',
-                fontSize: 30,
+                fontSize: RFPercentage(5.5),
               }}>
               کار های انجام شده
             </Text>
@@ -40,7 +40,7 @@ class CompletedSc extends Component {
               <Icon
                 type="Ionicons"
                 name="ios-arrow-back"
-                style={{fontSize: 25}}
+                style={{fontSize: RFPercentage(5)}}
                 onPress={() => navigation.goBack()}
               />
             </Button>
@@ -70,7 +70,7 @@ class CompletedSc extends Component {
                   <Text
                     style={{
                       fontFamily: 'Yekan',
-                      fontSize: 25,
+                      fontSize: RFPercentage(5),
                       textAlign: 'center',
                       color: 'white',
                     }}>
@@ -86,7 +86,8 @@ class CompletedSc extends Component {
                 width: '100%',
                 alignItems: 'center',
               }}>
-              <Text style={{fontFamily: 'Far_khodkar', fontSize: 25}}>
+              <Text
+                style={{fontFamily: 'Far_khodkar', fontSize: RFPercentage(5)}}>
                 کار انجام شده نداری
               </Text>
             </View>

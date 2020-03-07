@@ -6,6 +6,7 @@ import PopupDialog from '../popupDialog';
 import TodoList from '../todosList';
 import {connect} from 'react-redux';
 import {showDialog} from '../../actions/todoActions';
+import {RFPercentage} from 'react-native-responsive-fontsize';
 
 class HomeScreen extends Component {
   constructor(props) {
@@ -36,7 +37,7 @@ class HomeScreen extends Component {
             textStyle: {
               color: '#fff',
               fontFamily: 'Far_khodkar',
-              fontSize: 25,
+              fontSize: RFPercentage(5),
             },
           }),
         );
@@ -64,10 +65,10 @@ class HomeScreen extends Component {
             <Icon
               type="FontAwesome"
               name="check-square-o"
-              style={{fontSize: 30, color: 'orange'}}
+              style={{fontSize: RFPercentage(5.5), color: 'orange'}}
             />
             <Badge danger style={{justifyContent: 'center'}}>
-              <Text style={{fontSize: 15, color: 'orange'}}>
+              <Text style={{fontSize: RFPercentage(3.5), color: 'orange'}}>
                 {todos.filter(todo => todo.completed !== true).length}
               </Text>
             </Badge>
@@ -77,13 +78,18 @@ class HomeScreen extends Component {
               style={{
                 fontFamily: 'Far_khodkar',
                 color: 'white',
-                fontSize: 20,
+                fontSize: RFPercentage(3.5),
               }}>
               امروز چی کار دارم؟
             </Text>
           </View>
           <View style={{justifyContent: 'center'}}>
-            <Text style={{fontFamily: 'Yekan', fontSize: 13, color: 'white'}}>
+            <Text
+              style={{
+                fontFamily: 'Yekan',
+                fontSize: RFPercentage(2.5),
+                color: 'white',
+              }}>
               {`${jalaliDate.format('dddd')} ${jalaliDate.format(
                 'D',
               )} ${jalaliDate.format('MMMM')}`}
@@ -100,19 +106,22 @@ class HomeScreen extends Component {
             onPress={() => {
               showDialog();
             }}>
-            <Icon type="FontAwesome" name="plus" style={{fontSize: 25}} />
+            <Icon
+              type="FontAwesome"
+              name="plus"
+              style={{fontSize: RFPercentage(5)}}
+            />
           </Fab>
           <Fab
             style={{backgroundColor: '#f0ad4e'}}
             position="bottomRight"
             onPress={() => {
               navigation.navigate('Completed');
-              // this.componentWillUnmount();
             }}>
             <Icon
               type="FontAwesome5"
               name="clipboard-check"
-              style={{fontSize: 25}}
+              style={{fontSize: RFPercentage(5)}}
             />
           </Fab>
         </View>

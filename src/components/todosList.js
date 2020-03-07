@@ -42,7 +42,7 @@ class TodoList extends Component {
                 <Text
                   style={{
                     fontFamily: 'Yekan',
-                    fontSize: 25,
+                    fontSize: RFPercentage(5),
                     textAlign: 'center',
                     color: 'white',
                   }}>
@@ -65,7 +65,8 @@ class TodoList extends Component {
               width: '100%',
               alignItems: 'center',
             }}>
-            <Text style={{fontFamily: 'Far_khodkar', fontSize: 25}}>
+            <Text
+              style={{fontFamily: 'Far_khodkar', fontSize: RFPercentage(5)}}>
               امروز کاری برای انجام دادن نداری
             </Text>
           </View>

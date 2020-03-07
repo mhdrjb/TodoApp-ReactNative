@@ -9,6 +9,7 @@ import Dialog, {
 import {TextInput} from 'react-native';
 import {connect} from 'react-redux';
 import {addTodoAction, showDialog} from '../actions/todoActions';
+import {RFPercentage} from 'react-native-responsive-fontsize';
 
 class PopupDialog extends Component {
   constructor(props) {
@@ -30,14 +31,14 @@ class PopupDialog extends Component {
           <DialogTitle
             title="ثبت کار جدید"
             align="left"
-            textStyle={{fontFamily: 'Yekan', fontSize: 20}}
+            textStyle={{fontFamily: 'Yekan', fontSize: RFPercentage(5)}}
           />
         }
         footer={
           <DialogFooter>
             <DialogButton
               text="ثبت"
-              textStyle={{fontSize: 25, fontWeight: 'bold'}}
+              textStyle={{fontSize: RFPercentage(5), fontWeight: 'bold'}}
               style={{backgroundColor: 'lightblue'}}
               onPress={() => {
                 addTodo(this.state.todo);
@@ -49,7 +50,7 @@ class PopupDialog extends Component {
             />
             <DialogButton
               text="انصراف"
-              textStyle={{fontSize: 25, fontWeight: 'bold'}}
+              textStyle={{fontSize: RFPercentage(5), fontWeight: 'bold'}}
               style={{backgroundColor: 'orange'}}
               onPress={() => {
                 closeDialog();

@@ -1,6 +1,7 @@
 import {CommonActions} from '@react-navigation/native';
 import React, {Component} from 'react';
 import {Image, Text, View} from 'react-native';
+import {RFPercentage} from 'react-native-responsive-fontsize';
 
 class Splash extends Component {
   componentDidMount() {
@@ -27,7 +28,7 @@ class Splash extends Component {
             style={{
               fontFamily: 'Far_khodkar',
               color: 'white',
-              fontSize: 40,
+              fontSize: RFPercentage(7),
               textAlign: 'center',
             }}>
             کارهاتو به من بسپر
