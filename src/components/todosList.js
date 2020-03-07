@@ -3,6 +3,7 @@ import {ScrollView, View, Text, Alert} from 'react-native';
 import {Button, Icon} from 'native-base';
 import {connect} from 'react-redux';
 import {deleteTodoAction, todoCompleteAction} from '../actions/todoActions';
+import {RFPercentage} from 'react-native-responsive-fontsize';
 
 class TodoList extends Component {
   render() {
